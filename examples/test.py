@@ -44,7 +44,7 @@ try:
     Himage = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(Himage)
     draw.text((10, 0), 'Hello Mushrooms', font = font24, fill = 0)
-  draw.text((10, 20), temperature, font=font24, fill=0)
+    draw.text((10, 20), temperature, font=font24, fill=0)
     draw.text((10, 40), humidity, font=font24, fill=0)
     draw.line((20, 50, 70, 100), fill = 0)
     draw.line((70, 50, 20, 100), fill = 0)
