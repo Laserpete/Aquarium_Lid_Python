@@ -60,7 +60,7 @@ try:
     num = 0
     while (True):
         time_draw.rectangle((10, 10, 120, 50), fill = 255)
-         draw.text((10, 0), 'Hello Mushrooms', font = font24, fill = 0)
+        draw.text((10, 0), 'Hello Mushrooms', font = font24, fill = 0)
         draw.text((10, 20), temperature, font=font24, fill=0)
         draw.text((10, 40), humidity, font=font24, fill=0)
         time_draw.text((10, 60), time.strftime('%H:%M:%S'), font = font24, fill = 0)
