@@ -58,12 +58,13 @@ try:
     epd.display_Base(epd.getbuffer(time_image))
     num = 0
     while (True):
+        Himage = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
+        draw = ImageDraw.Draw(Himage)
         time_draw.rectangle((10, 10, 120, 50), fill=255)
-        time_draw((10, 0), 'Hello Mushrooms', font=font24, fill=0)
-        time_draw((10, 20), temperature, font=font24, fill=0)
-        time_draw((10, 40), humidity, font=font24, fill=0)
-        time_draw.text((10, 60), time.strftime(
-            '%H:%M:%S'), font=font24, fill=0)
+        draw.text((10, 0), 'Hello Mushrooms', font=font24, fill=0)
+        draw.text((10, 20), temperature, font=font24, fill=0)
+        draw.text((10, 40), humidity, font=font24, fill=0)
+        time_draw.text((10, 60), time.strftime('%H:%M:%S'), font=font24, fill=0)
         newimage = time_image.crop([10, 10, 120, 50])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
