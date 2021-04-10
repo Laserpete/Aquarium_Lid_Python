@@ -58,7 +58,6 @@ try:
     epd.display_Base(epd.getbuffer(time_image))
     num = 0
     while (True):
-        draw = ImageDraw.Draw(Himage)
         time_draw.rectangle((10, 10, 120, 50), fill=255)
         time_draw((10, 0), 'Hello Mushrooms', font=font24, fill=0)
         time_draw((10, 20), temperature, font=font24, fill=0)
