@@ -21,7 +21,7 @@ htu21d = HTU21D(1, 0x40)
 
 humid = htu21d.humidity()
 humid = round(humid.RH)
-humidity str(humid)
+humidity = str(humid)
 
 temp = htu21d.temperature()
 C, F, K = temp
