@@ -22,11 +22,13 @@ htu21d = HTU21D(1, 0x40)
 humid = htu21d.humidity()
 humid = round(humid.RH)
 humidity = str(humid)
+humidity = "Humidity : " + humidity
 
 temp = htu21d.temperature()
 C, F, K = temp
 C = round(C,2)
 temperature = str(C)
+temperature = "Temperature : " + temperature
 
 try:
     logging.info("epd2in9 V2 Demo") 
@@ -46,14 +48,6 @@ try:
     draw.text((10, 0), 'Hello Mushrooms', font = font24, fill = 0)
     draw.text((10, 20), temperature, font=font24, fill=0)
     draw.text((10, 40), humidity, font=font24, fill=0)
-    draw.line((20, 50, 70, 100), fill = 0)
-    draw.line((70, 50, 20, 100), fill = 0)
-    draw.rectangle((20, 50, 70, 100), outline = 0)
-    draw.line((165, 50, 165, 100), fill = 0)
-    draw.line((140, 75, 190, 75), fill = 0)
-    draw.arc((140, 50, 190, 100), 0, 360, fill = 0)
-    draw.rectangle((80, 50, 130, 100), fill = 0)
-    draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
     epd.display(epd.getbuffer(Himage))
     time.sleep(2)
     
