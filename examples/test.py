@@ -63,10 +63,10 @@ try:
         time_draw.text((10, 40), temperature, font=font24, fill=0)
         time_draw.text((10, 60), humidity, font=font24, fill=0)
         time_draw.text((10, 80), time.strftime('%H:%M'), font=font24, fill=0)
+        newimage = time_image.crop([10, 10, 10, 10])
+        time_image.paste(newimage, (10, 10))
+        epd.display_Partial(epd.getbuffer(time_image))
 
-        num = num + 1
-        if(num == 10):
-            break
 
     logging.info("Clear...")
     epd.init()
