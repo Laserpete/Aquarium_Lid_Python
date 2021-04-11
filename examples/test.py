@@ -15,11 +15,15 @@ import traceback
 
 from sensor import HTU21D
 
+import RPi.GPIO as GPIO
 
 logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
+GPIO.setwanings(false)
+GPIO.setmode(GPIO.BCM)
+GIPO.setup(20, GPIO.OUT, intial=GPIO.LOW)
 
 try:
     logging.info("epd2in9 V2 Demo")
@@ -64,6 +68,14 @@ try:
         year, mon, day, hour, min, sec, wday, yday, dst = time.localtime()
         print(hour)
 
+        # if it is later than 0800, turn the lights on
+        if hour > 8 and hour <20:
+            GPIO.output(20, GPIO.HIGH)
+
+        if hour > 20 and hour <8
+
+
+            
     logging.info("Clear...")
     epd.init()
     epd.Clear(0xFF)
