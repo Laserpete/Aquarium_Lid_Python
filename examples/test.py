@@ -82,9 +82,10 @@ try:
         # if it is afer 2000 or before 0800 turn the lights off
         if hour >20 or hour <8:
             GPIO.output(lightSwitch, GPIO.LOW)
-
-        print(humid)
         
+        currentHumidityString = "Current humidity is : " + str(humid)
+        print(currentHumidityString)
+
         if humid<90:
             GPIO.output(humidifier, GPIO.HIGH)
             print("Humidifer On")
