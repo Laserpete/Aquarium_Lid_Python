@@ -60,7 +60,7 @@ try:
         
         
         
-        newimage = time_image.crop([10, 30, 120, 120])
+        newimage = time_image.crop([0, 0, 128, 296])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
