@@ -51,7 +51,7 @@ try:
         temperature = "Temperature : " + temperature + " C"
 
         Time = "Time : " + time.strftime('%H:%M:%S')
-        time_draw.rectangle((140, 10, 120, 120), fill=255)
+        time_draw.rectangle((10, 30, 120, 120), fill=255)
         time_draw.text((10, 10), 'Hello Mushrooms', font=font24, fill=0)
         time_draw.text((10, 30), Time, font=font24, fill=0)
         time_draw.text((10, 50), temperature, font=font24, fill=0)
@@ -60,7 +60,7 @@ try:
         
         
         
-        newimage = time_image.crop([140, 10, 120, 120])
+        newimage = time_image.crop([10, 30, 120, 120])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
