@@ -57,6 +57,8 @@ try:
         time_draw.rectangle((10, 10, 120, 50), fill=255)
         time_draw.text((10, 10), time.strftime('%H:%M:%S'), font=font24, fill=0)
         time_draw.text((10, 30), time.strftime('%H:%M:%S'), font=font24, fill=0)
+        time_draw.text((10, 50), time.strftime('%H:%M:%S'), font=font24, fill=0)
+        time_draw.text((120, 10), time.strftime('%H:%M:%S'), font=font24, fill=0)
         newimage = time_image.crop([10, 10, 120, 50])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
