@@ -42,7 +42,7 @@ try:
         humid = htu21d.humidity()
         humid = round(humid.RH, 2)
         humidity = str(humid)
-        humidity = "Humidity \t: " + humidity + " %RH"
+        humidity = "Humidity    : " + humidity + " %RH"
 
         temp = htu21d.temperature()
         C, F, K = temp
@@ -50,7 +50,7 @@ try:
         temperature = str(C)
         temperature = "Temperature : " + temperature + " C"
 
-        Time = "Time \t\t: " + time.strftime('%H:%M:%S')
+        Time = "Time        : " + time.strftime('%H:%M:%S')
 
         time_draw.rectangle((10, 10, 296, 128), fill=255)
         time_draw.text((10, 10), 'Hello Mushrooms', font=font24, fill=0)
