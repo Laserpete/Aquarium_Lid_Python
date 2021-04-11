@@ -21,11 +21,15 @@ logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
+lightSwitch = 20
+humidifier = 21
+
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(lightSwitch, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(humidifier, GPIO.OUT, initial=GPIO.LOW)
 
-lightSwitch = 20
+
 
 try:
     logging.info("epd2in9 V2 Demo")
@@ -67,8 +71,10 @@ try:
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
+        #  unpack time.localtime tuple into some usable variables and print it out
         year, mon, day, hour, min, sec, wday, yday, dst = time.localtime()
-        print(hour)
+        printhourstring = "The current hour is : " + str(hour)
+        print(printhourstring)
 
         # if it is later than 0800, but earlier than 2000 turn the lights on
         if hour > 8 and hour <20:
@@ -77,7 +83,13 @@ try:
         if hour >20 or hour <8:
             GPIO.output(lightSwitch, GPIO.LOW)
 
-            
+        if humid<90:
+            GPIO.output(humidifier, GPIO.HIGH)
+
+        if humid>90:
+            GPIO.output(humidifier, GPIO.LOW)
+
+        
     logging.info("Clear...")
     epd.init()
     epd.Clear(0xFF)
