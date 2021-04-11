@@ -17,7 +17,7 @@ import traceback
 
 logging.basicConfig(level=logging.DEBUG)
 
-htu21d = HTU21D(1, 0x40)
+
 
 
 try:
@@ -48,6 +48,7 @@ try:
     epd.display_Base(epd.getbuffer(time_image))
     num = 0
     while (True):
+        htu21d = HTU21D(1, 0x40)
         humid = htu21d.humidity()
         humid = round(humid.RH)
         humidity = str(humid)
