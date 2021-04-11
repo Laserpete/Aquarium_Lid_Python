@@ -53,7 +53,7 @@ try:
         time_draw.rectangle((10, 10, 120, 50), fill=255)
         
         time_draw.text((10, 80), 'Hello Mushrooms', font=font24, fill=0)
-        time_draw.text((10, 10), time.strftime('%H:%M'), font=font24, fill=0)
+        time_draw.text((10, 10), time.strftime('%H:%M:%S'), font=font24, fill=0)
         time_draw.text((10, 40), temperature, font=font24, fill=0)
         time_draw.text((10, 60), humidity, font=font24, fill=0)
         
