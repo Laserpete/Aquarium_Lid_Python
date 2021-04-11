@@ -42,7 +42,7 @@ try:
         humid = htu21d.humidity()
         humid = round(humid.RH, 2)
         humidity = str(humid)
-        humidity = "Humidity : " + humidity + " %RH"
+        humidity = "Humidity    : " + humidity + " %RH"
 
         temp = htu21d.temperature()
         C, F, K = temp
@@ -50,14 +50,15 @@ try:
         temperature = str(C)
         temperature = "Temperature : " + temperature + " C"
 
-        Time = "Time : " + time.strftime('%H:%M:%S')
-        time_draw.rectangle((10, 10, 296, 128), fill=255)
+        Time = "Time        : " + time.strftime('%H:%M:%S')
+
+        time_draw.rectangle((10, 40, 296, 88), fill=255)
         time_draw.text((10, 10), 'Hello Mushrooms', font=font24, fill=0)
-        time_draw.text((10, 30), Time, font=font24, fill=0)
-        time_draw.text((10, 50), temperature, font=font24, fill=0)
-        time_draw.text((10, 70), humidity, font=font24, fill=0)
-        newimage = time_image.crop([10, 10, 296, 128])
-        time_image.paste(newimage, (10, 10))
+        time_draw.text((10, 40), Time, font=font24, fill=0)
+        time_draw.text((10, 60), temperature, font=font24, fill=0)
+        time_draw.text((10, 80), humidity, font=font24, fill=0)
+        newimage = time_image.crop([10, 10, 296, 88])
+        time_image.paste(newimage, (10, 40))
         epd.display_Partial(epd.getbuffer(time_image))
 
     logging.info("Clear...")
