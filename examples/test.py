@@ -25,6 +25,8 @@ GPIO.setwanings(false)
 GPIO.setmode(GPIO.BCM)
 GIPO.setup(20, GPIO.OUT, intial=GPIO.LOW)
 
+lightSwitch = 20
+
 try:
     logging.info("epd2in9 V2 Demo")
     epd = epd2in9_V2.EPD()
@@ -68,12 +70,12 @@ try:
         year, mon, day, hour, min, sec, wday, yday, dst = time.localtime()
         print(hour)
 
-        # if it is later than 0800, turn the lights on
+        # if it is later than 0800, but earlier than 2000 turn the lights on
         if hour > 8 and hour <20:
-            GPIO.output(20, GPIO.HIGH)
-
-        if hour > 20 and hour <8
-
+            GPIO.output(lightSwitch, GPIO.HIGH)
+        # if it is afer 2000 or before 0800 turn the lights off
+        if hour >20 or hour <8:
+            GPIO.output(lightSwitch, GPIO.LOW)
 
             
     logging.info("Clear...")
