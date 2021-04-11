@@ -42,7 +42,7 @@ try:
         humid = htu21d.humidity()
         humid = round(humid.RH, 2)
         humidity = str(humid)
-        humidity = "Humidity         : " + humidity + " %RH"
+        humidity = "Humidity        : " + humidity + " %RH"
 
         temp = htu21d.temperature()
         C, F, K = temp
@@ -61,7 +61,7 @@ try:
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
-        currentTime = time.localtime
+        currentTime = time.localtime()
         print(currentTime)
 
     logging.info("Clear...")
