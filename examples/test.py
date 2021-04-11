@@ -32,7 +32,7 @@ GPIO.setup(humidifier, GPIO.OUT, initial=GPIO.LOW)
 
 
 try:
-    logging.info("epd2in9 V2 Demo")
+    logging.info("Aquarium Lid Test")
     epd = epd2in9_V2.EPD()
 
     logging.info("init and Clear")
@@ -83,11 +83,15 @@ try:
         if hour >20 or hour <8:
             GPIO.output(lightSwitch, GPIO.LOW)
 
+        print(humid)
+        
         if humid<90:
             GPIO.output(humidifier, GPIO.HIGH)
+            print("Humidifer On")
 
         if humid>90:
             GPIO.output(humidifier, GPIO.LOW)
+            print("Humidifer Off")
 
         
     logging.info("Clear...")
