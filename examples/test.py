@@ -51,7 +51,7 @@ try:
         temperature = "Temperature : " + temperature + " C"
 
         Time = "Time : " + time.strftime('%H:%M:%S')
-        time_draw.rectangle((10, 10, 120, 296), fill=255)
+        #time_draw.rectangle((10, 10, 120, 296), fill=255)
         time_draw.text((10, 10), 'Hello Mushrooms', font=font24, fill=0)
         time_draw.text((10, 30), Time, font=font24, fill=0)
         time_draw.text((10, 50), temperature, font=font24, fill=0)
