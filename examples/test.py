@@ -1,19 +1,18 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
-from PIL import Image, ImageDraw, ImageFont
-from sensor import HTU21D
-import traceback
-import time
-from waveshare_epd import epd2in9_V2
-import logging
 import sys
 import os
-picdir = os.path.join(os.path.dirname(
-    os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join(os.path.dirname(
-    os.path.dirname(os.path.realpath(__file__))), 'lib')
+picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 if os.path.exists(libdir):
     sys.path.append(libdir)
+
+import logging
+from waveshare_epd import epd2in9_V2
+import time
+from PIL import Image,ImageDraw,ImageFont
+import traceback
+
 
 
 logging.basicConfig(level=logging.DEBUG)
