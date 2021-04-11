@@ -56,10 +56,6 @@ try:
         time_draw.text((10, 30), Time, font=font24, fill=0)
         time_draw.text((10, 50), temperature, font=font24, fill=0)
         time_draw.text((10, 70), humidity, font=font24, fill=0)
-        
-        
-        
-        
         newimage = time_image.crop([10, 10, 128, 296])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
