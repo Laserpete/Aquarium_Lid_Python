@@ -23,7 +23,7 @@ htu21d = HTU21D(1, 0x40)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(20, GPIO.OUT, intial=GPIO.LOW)
+GPIO.setup(20, GPIO.OUT, initial=GPIO.LOW)
 
 lightSwitch = 20
 
