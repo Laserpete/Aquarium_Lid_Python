@@ -32,16 +32,6 @@ try:
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
 
-    # # Drawing on the Horizontal image
-    # logging.info("1.Drawing on the Horizontal image...")
-    # Himage = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    # draw = ImageDraw.Draw(Himage)
-    # draw.text((10, 0), 'Hello Mushrooms', font = font24, fill = 0)
-    # draw.text((10, 20), temperature, font=font24, fill=0)
-    # draw.text((10, 40), humidity, font=font24, fill=0)
-    # epd.display(epd.getbuffer(Himage))
-    # time.sleep(2)
-
     # partial update
     logging.info("5.show time")
     time_image = Image.new('1', (epd.height, epd.width), 255)
@@ -59,12 +49,15 @@ try:
         C = round(C, 2)
         temperature = str(C)
         temperature = "Temperature : " + temperature + " C"
-        time_draw.rectangle((10, 10, 120, 60), fill=255)
-        time_draw.text((10, 0), 'Hello Mushrooms', font=font24, fill=0)
+        
+        time_draw.rectangle((10, 10, 120, 50), fill=255)
+        
+        time_draw.text((10, 80), 'Hello Mushrooms', font=font24, fill=0)
+        time_draw.text((10, 10), time.strftime('%H:%M'), font=font24, fill=0)
         time_draw.text((10, 40), temperature, font=font24, fill=0)
         time_draw.text((10, 60), humidity, font=font24, fill=0)
-        time_draw.text((10, 80), time.strftime('%H:%M'), font=font24, fill=0)
-        newimage = time_image.crop([10, 10, 10, 10])
+        
+        newimage = time_image.crop([10, 10, 120, 50])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
