@@ -40,9 +40,9 @@ try:
     num = 0
     while (True):
         humid = htu21d.humidity()
-        humid = round(humid.RH)
+        humid = round(humid.RH, 2)
         humidity = str(humid)
-        humidity = "Humidity : " + humidity + " %"
+        humidity = "Humidity : " + humidity + " %RH"
 
         temp = htu21d.temperature()
         C, F, K = temp
@@ -51,7 +51,7 @@ try:
         temperature = "Temperature : " + temperature + " C"
 
         Time = "Time : " + time.strftime('%H:%M:%S')
-        #time_draw.rectangle((10, 10, 120, 296), fill=255)
+        time_draw.rectangle((10, 10, 128, 296), fill=255)
         time_draw.text((10, 10), 'Hello Mushrooms', font=font24, fill=0)
         time_draw.text((10, 30), Time, font=font24, fill=0)
         time_draw.text((10, 50), temperature, font=font24, fill=0)
