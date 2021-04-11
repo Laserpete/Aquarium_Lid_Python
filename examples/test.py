@@ -61,8 +61,8 @@ try:
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
-        currentTime = time.localtime()
-        print(currentTime)
+        year, mon, day, hour, min, sec, wday, yday, dst = time.localtime()
+        print(hour)
 
     logging.info("Clear...")
     epd.init()
