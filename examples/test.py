@@ -1,34 +1,25 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
+from PIL import Image, ImageDraw, ImageFont
+from sensor import HTU21D
+import traceback
+import time
+from waveshare_epd import epd2in9_V2
+import logging
 import sys
 import os
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+picdir = os.path.join(os.path.dirname(
+    os.path.dirname(os.path.realpath(__file__))), 'pic')
+libdir = os.path.join(os.path.dirname(
+    os.path.dirname(os.path.realpath(__file__))), 'lib')
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
-import logging
-from waveshare_epd import epd2in9_V2
-import time
-from PIL import Image,ImageDraw,ImageFont
-import traceback
-
-from sensor import HTU21D
 
 logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
-humid = htu21d.humidity()
-humid = round(humid.RH)
-humidity = str(humid)
-humidity = "Humidity : " + humidity + " %"
-
-temp = htu21d.temperature()
-C, F, K = temp
-C = round(C, 2)
-temperature = str(C)
-temperature = "Temperature : " + temperature + " C"
 
 try:
     logging.info("epd2in9 V2 Demo")
@@ -58,6 +49,16 @@ try:
     epd.display_Base(epd.getbuffer(time_image))
     num = 0
     while (True):
+        humid = htu21d.humidity()
+        humid = round(humid.RH)
+        humidity = str(humid)
+        humidity = "Humidity : " + humidity + " %"
+
+        temp = htu21d.temperature()
+        C, F, K = temp
+        C = round(C, 2)
+        temperature = str(C)
+        temperature = "Temperature : " + temperature + " C"
         time_draw.rectangle((10, 10, 120, 60), fill=255)
         time_draw.text((10, 0), 'Hello Mushrooms', font=font24, fill=0)
         time_draw.text((10, 40), temperature, font=font24, fill=0)
@@ -66,7 +67,6 @@ try:
         newimage = time_image.crop([10, 10, 10, 10])
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
-
 
     logging.info("Clear...")
     epd.init()
