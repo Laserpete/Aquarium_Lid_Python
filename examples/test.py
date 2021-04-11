@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
-GPIO.setwanings(false)
+GPIO.setwarnings(false)
 GPIO.setmode(GPIO.BCM)
 GIPO.setup(20, GPIO.OUT, intial=GPIO.LOW)
 
