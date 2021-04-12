@@ -101,7 +101,8 @@ try:
         if minutes % 5 == 0:
             print("Minutes = ", minutes, "fan on.")
             GPIO.output(fanGPIO, GPIO.HIGH)
-            sleep(30)
+        if minutes % 5 != 0:
+            print ("Fan off.")
             GPIO.output(fanGPIO, GPIO.LOW)
 
         
