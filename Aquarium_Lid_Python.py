@@ -3,7 +3,7 @@
 import sys
 import os
 picdir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'pic')
-libdir = ('/home/pi/Aquarium_Lid_Python/lib')
+libdir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'pic')
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
