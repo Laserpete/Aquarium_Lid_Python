@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import sys
 import os
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
+picdir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'pic')
 libdir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'lib')
 if os.path.exists(libdir):
     sys.path.append(libdir)
@@ -23,7 +23,7 @@ htu21d = HTU21D(1, 0x40)
 
 lightSwitchGPIO = 20
 humidifierGPIO = 21
-fanGPIO = 
+fanGPIO = 16
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
