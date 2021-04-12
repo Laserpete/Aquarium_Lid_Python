@@ -8,7 +8,7 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 
 import logging
-from waveshare_epd import epd2in9_V2
+from lib/waveshare_epd import epd2in9_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
@@ -21,8 +21,9 @@ logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
-lightSwitch = 20
-humidifier = 21
+lightSwitchGPIO = 20
+humidifierGPIO = 21
+fanGPIO = 
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -72,29 +73,35 @@ try:
         epd.display_Partial(epd.getbuffer(time_image))
 
         #  unpack time.localtime tuple into some usable variables and print it out
-        year, mon, day, hour, min, sec, wday, yday, dst = time.localtime()
+        year, mon, day, hour, minutes, sec, wday, yday, dst = time.localtime()
         printhourstring = "The current hour is : " + str(hour)
         print(printhourstring)
 
         # if it is later than 0800, but earlier than 2000 turn the lights on
         if hour > 8 and hour <20:
-            GPIO.output(lightSwitch, GPIO.HIGH)
+            GPIO.output(lightSwitchGPIO, GPIO.HIGH)
             print("Lights On")
         # if it is afer 2000 or before 0800 turn the lights off
         if hour >20 or hour <8:
-            GPIO.output(lightSwitch, GPIO.LOW)
+            GPIO.output(lightSwitchGPIO, GPIO.LOW)
             print("Lights Off")
         
         currentHumidityString = "Current humidity is : " + str(humid)
         print(currentHumidityString)
 
         if humid<90:
-            GPIO.output(humidifier, GPIO.HIGH)
+            GPIO.output(humidifierGPIO, GPIO.HIGH)
             print("Humidifer On")
 
         if humid>90:
-            GPIO.output(humidifier, GPIO.LOW)
+            GPIO.output(humidifierGPIO, GPIO.LOW)
             print("Humidifer Off")
+
+        if minutes % 5 == 0:
+            print("Minutes = " minutes "fan on.")
+            GPIO.output(fanGPIO, GPIO.HIGH)
+            sleep(30)
+            GPIO.output(fanGPIO, GPIO.LOW)
 
         
     logging.info("Clear...")
