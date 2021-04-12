@@ -27,8 +27,9 @@ fanGPIO = 16
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(lightSwitch, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(humidifier, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(lightSwitchGPIO, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(humidifierGPIO, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(fanGPIO, GPIO.OUT, initial=GPIO.LOW)
 
 
 
