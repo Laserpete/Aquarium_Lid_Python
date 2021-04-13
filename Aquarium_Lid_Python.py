@@ -12,9 +12,7 @@ from waveshare_epd import epd2in9_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
-
 from sensor import HTU21D
-
 import RPi.GPIO as GPIO
 
 logging.basicConfig(level=logging.DEBUG)
@@ -26,7 +24,8 @@ FAN_GPIO = 16           # 36
 LIGHT_SWITCH_GPIO = 20  # 38
 HUMIDIFIER_GPIO = 21    # 40
 
-FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, change this if you want
+FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, feel free to change this
+FAN_PWM = 50
 
 # Setup GPIO pins
 GPIO.setwarnings(False)
@@ -34,6 +33,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LIGHT_SWITCH_GPIO, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(HUMIDIFIER_GPIO, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(FAN_GPIO, GPIO.OUT, initial=GPIO.LOW)
+PWMFan=GPIO.PWM(FAN_GPIO, 100) # 100 Hz PWM on the fan pin
+
 
 
 
@@ -120,11 +121,11 @@ try:
 # Time based fan control
         if minutes % FAN_MINUTES_MODULO == 0:
             print("Minutes = ", minutes, "fan on.")
-            GPIO.output(FAN_GPIO, GPIO.HIGH)
+            #GPIO.output(FAN_GPIO, GPIO.HIGH)
+            PWMFan.start(FAN_PWM)
         if minutes % FAN_MINUTES_MODULO != 0:
             print ("Fan off.")
-            GPIO.output(FAN_GPIO, GPIO.LOW)
-
+            #GPIO.output(FAN_GPIO, GPIO.LOW)
         
     logging.info("Clear...")
     epd.init()
