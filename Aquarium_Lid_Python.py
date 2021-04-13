@@ -25,7 +25,7 @@ LIGHT_SWITCH_GPIO = 20  # 38
 HUMIDIFIER_GPIO = 21    # 40
 
 FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, feel free to change this
-FAN_PWM = 50
+FAN_PWM_ON_PERCENTAGE = 50
 
 # Setup GPIO pins
 GPIO.setwarnings(False)
@@ -34,8 +34,6 @@ GPIO.setup(LIGHT_SWITCH_GPIO, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(HUMIDIFIER_GPIO, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(FAN_GPIO, GPIO.OUT, initial=GPIO.LOW)
 PWMFan=GPIO.PWM(FAN_GPIO, 100) # 100 Hz PWM on the fan pin
-
-
 
 
 try:
@@ -121,11 +119,12 @@ try:
 # Time based fan control
         if minutes % FAN_MINUTES_MODULO == 0:
             print("Minutes = ", minutes, "fan PWM = ", FAN_PWM)
+            PWMFan.start(FAN_PWM_ON_PERCENTAGE)
             #GPIO.output(FAN_GPIO, GPIO.HIGH)
-            PWMFan.start(FAN_PWM)
         if minutes % FAN_MINUTES_MODULO != 0:
             print ("Fan off.")
-            GPIO.output(FAN_GPIO, GPIO.LOW)
+            PWMFan.stop()
+            #GPIO.output(FAN_GPIO, GPIO.LOW)
         
     logging.info("Clear...")
     epd.init()
