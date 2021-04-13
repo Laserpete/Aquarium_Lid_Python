@@ -120,7 +120,7 @@ try:
 
 # Time based fan control
         if minutes % FAN_MINUTES_MODULO == 0:
-            print("Minutes = ", minutes, "fan on.")
+            print("Minutes = ", minutes, "fan PWM = ", FAN_PWM)
             #GPIO.output(FAN_GPIO, GPIO.HIGH)
             PWMFan.start(FAN_PWM)
         if minutes % FAN_MINUTES_MODULO != 0:
