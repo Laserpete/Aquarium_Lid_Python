@@ -21,49 +21,64 @@ logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
-lightSwitchGPIO = 20
-humidifierGPIO = 21
-fanGPIO = 16
+#GPIO pins. These are the broadcom pin numbers, rather than the board physical pin numbers, which are given in the comments comments here;
+FAN_GPIO = 16           # 36
+LIGHT_SWITCH_GPIO = 20  # 38
+HUMIDIFIER_GPIO = 21    # 40
 
+FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, change this if you want
+
+# Setup GPIO pins
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(lightSwitchGPIO, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(humidifierGPIO, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(fanGPIO, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(LIGHT_SWITCH_GPIO, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(HUMIDIFIER_GPIO, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(FAN_GPIO, GPIO.OUT, initial=GPIO.LOW)
 
 
 
 try:
     logging.info("Aquarium Lid Test")
+
+    # Start the e-Ink display
     epd = epd2in9_V2.EPD()
 
     logging.info("init and Clear")
     epd.init()
     epd.Clear(0xFF)
 
+    # Objects for the fonts
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
 
-    # partial update
-    logging.info("5.show time")
+    # Set up EDP functions
     time_image = Image.new('1', (epd.height, epd.width), 255)
     time_draw = ImageDraw.Draw(time_image)
     epd.display_Base(epd.getbuffer(time_image))
-    num = 0
+
     while (True):
+
+        # Measure and round humidity
         humid = htu21d.humidity()
         humid = round(humid.RH, 2)
+
+        # Format humidity for display
         humidity = str(humid)
         humidity = "Humidity        : " + humidity + " %RH"
 
+        # Measure and round temperature
         temp = htu21d.temperature()
         C, F, K = temp
         C = round(C, 2)
+
+        # Format temperature for display
         temperature = str(C)
         temperature = "Temperature : " + temperature + " C"
 
+        # Format time for display
         Time = "Time                : " + time.strftime('%H:%M:%S')
 
+        # Display stuff on the screen
         time_draw.rectangle((10, 10, 296, 128), fill=255)
         time_draw.text((10, 10), 'Hello Mushrooms', font=font24, fill=0)
         time_draw.text((10, 40), Time, font=font24, fill=0)
@@ -73,37 +88,42 @@ try:
         time_image.paste(newimage, (10, 10))
         epd.display_Partial(epd.getbuffer(time_image))
 
-        #  unpack time.localtime tuple into some usable variables and print it out
+        # Unpack time.localtime tuple into some usable variables
         year, mon, day, hour, minutes, sec, wday, yday, dst = time.localtime()
+        # Format hours for display
         printhourstring = "The current hour is : " + str(hour)
         print(printhourstring)
 
+# Time based light control
+
         # if it is later than 0800, but earlier than 2000 turn the lights on
         if hour > 8 and hour <20:
-            GPIO.output(lightSwitchGPIO, GPIO.HIGH)
+            GPIO.output(LIGHT_SWITCH_GPIO, GPIO.HIGH)
             print("Lights On")
         # if it is afer 2000 or before 0800 turn the lights off
         if hour >20 or hour <8:
-            GPIO.output(lightSwitchGPIO, GPIO.LOW)
+            GPIO.output(LIGHT_SWITCH_GPIO, GPIO.LOW)
             print("Lights Off")
-        
+
+# Humidity based humidifier control        
         currentHumidityString = "Current humidity is : " + str(humid)
         print(currentHumidityString)
 
         if humid<90:
-            GPIO.output(humidifierGPIO, GPIO.HIGH)
+            GPIO.output(HUMIDIFIER_GPIO, GPIO.HIGH)
             print("Humidifer On")
 
         if humid>90:
-            GPIO.output(humidifierGPIO, GPIO.LOW)
+            GPIO.output(HUMIDIFIER_GPIO, GPIO.LOW)
             print("Humidifer Off")
 
-        if minutes % 5 == 0:
+# Time based fan control
+        if minutes % FAN_MINUTES_MODULO == 0:
             print("Minutes = ", minutes, "fan on.")
-            GPIO.output(fanGPIO, GPIO.HIGH)
-        if minutes % 5 != 0:
+            GPIO.output(FAN_GPIO, GPIO.HIGH)
+        if minutes % FAN_MINUTES_MODULO != 0:
             print ("Fan off.")
-            GPIO.output(fanGPIO, GPIO.LOW)
+            GPIO.output(FAN_GPIO, GPIO.LOW)
 
         
     logging.info("Clear...")
