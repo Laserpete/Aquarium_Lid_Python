@@ -32,7 +32,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LIGHT_SWITCH_GPIO, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(HUMIDIFIER_GPIO, GPIO.OUT, initial=GPIO.LOW)
-#GPIO.setup(FAN_GPIO, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(FAN_GPIO, GPIO.OUT, initial=GPIO.LOW)
 PWMFan=GPIO.PWM(FAN_GPIO, 100) # 100 Hz PWM on the fan pin
 
 
