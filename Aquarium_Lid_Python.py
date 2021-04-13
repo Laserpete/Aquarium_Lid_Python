@@ -118,7 +118,7 @@ try:
 
 # Time based fan control
         if minutes % FAN_MINUTES_MODULO == 0:
-            print("Minutes = ", minutes, "fan PWM = ", FAN_PWM)
+            print("Minutes = ", minutes, "fan PWM = ", FAN_PWM_ON_PERCENTAGE)
             PWMFan.start(FAN_PWM_ON_PERCENTAGE)
             #GPIO.output(FAN_GPIO, GPIO.HIGH)
         if minutes % FAN_MINUTES_MODULO != 0:
