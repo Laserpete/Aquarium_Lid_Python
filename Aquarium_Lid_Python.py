@@ -125,7 +125,7 @@ try:
             PWMFan.start(FAN_PWM)
         if minutes % FAN_MINUTES_MODULO != 0:
             print ("Fan off.")
-            #GPIO.output(FAN_GPIO, GPIO.LOW)
+            GPIO.output(FAN_GPIO, GPIO.LOW)
         
     logging.info("Clear...")
     epd.init()
