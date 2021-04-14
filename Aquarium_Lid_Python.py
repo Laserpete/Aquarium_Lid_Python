@@ -100,7 +100,7 @@ try:
             GPIO.output(LIGHT_SWITCH_GPIO, GPIO.HIGH)
             print("Lights On")
         # if it is afer 2000 or before 0800 turn the lights off
-        if hour >20 or hour <8:
+        if hour >=20 or hour <8:
             GPIO.output(LIGHT_SWITCH_GPIO, GPIO.LOW)
             print("Lights Off")
 
