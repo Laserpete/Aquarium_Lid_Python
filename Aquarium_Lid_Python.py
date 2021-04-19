@@ -110,21 +110,23 @@ try:
 
         if humid<90:
             GPIO.output(HUMIDIFIER_GPIO, GPIO.HIGH)
+            PWMFan.start(FAN_MINUTES_MODULO, FAN_PWM_ON_PERCENTAGE)
             print("Humidifer On")
 
         if humid>90:
             GPIO.output(HUMIDIFIER_GPIO, GPIO.LOW)
+            PWMFan.stop()
             print("Humidifer Off")
 
 # Fan control
-        if minutes % FAN_MINUTES_MODULO == 0 or humid < 90:
-            print("Minutes = ", minutes, "fan PWM = ", FAN_PWM_ON_PERCENTAGE)
-            PWMFan.start(FAN_PWM_ON_PERCENTAGE)
-            #GPIO.output(FAN_GPIO, GPIO.HIGH)
-        if minutes % FAN_MINUTES_MODULO != 0 or humid > 90:
-            print ("Fan off.")
-            PWMFan.stop()
-            #GPIO.output(FAN_GPIO, GPIO.LOW)
+        # if minutes % FAN_MINUTES_MODULO == 0 or humid < 90:
+        #     print("Minutes = ", minutes, "fan PWM = ", FAN_PWM_ON_PERCENTAGE)
+        #     PWMFan.start(FAN_PWM_ON_PERCENTAGE)
+        #     #GPIO.output(FAN_GPIO, GPIO.HIGH)
+        # if minutes % FAN_MINUTES_MODULO != 0 or humid > 90:
+        #     print ("Fan off.")
+        #     PWMFan.stop()
+        #     #GPIO.output(FAN_GPIO, GPIO.LOW)
         
     logging.info("Clear...")
     epd.init()
