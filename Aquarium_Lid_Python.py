@@ -25,7 +25,7 @@ LIGHT_SWITCH_GPIO = 20  # 38
 HUMIDIFIER_GPIO = 21    # 40
 
 FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, feel free to change this
-FAN_PWM_ON_PERCENTAGE = 50
+FAN_PWM_ON_PERCENTAGE = 25
 
 # Setup GPIO pins
 GPIO.setwarnings(False)
