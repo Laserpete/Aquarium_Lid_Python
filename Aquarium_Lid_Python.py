@@ -110,7 +110,7 @@ try:
 
         if humid<90:
             GPIO.output(HUMIDIFIER_GPIO, GPIO.HIGH)
-            PWMFan.start(FAN_MINUTES_MODULO, FAN_PWM_ON_PERCENTAGE)
+            PWMFan.start(FAN_PWM_ON_PERCENTAGE)
             print("Humidifer On")
 
         if humid>90:
