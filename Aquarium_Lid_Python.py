@@ -27,6 +27,8 @@ HUMIDIFIER_GPIO = 21    # 40
 FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, feel free to change this
 FAN_PWM_ON_PERCENTAGE = 25
 
+HUMIDITY_THRESHOLD = 85
+
 # Setup GPIO pins
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -108,12 +110,12 @@ try:
         currentHumidityString = "Current humidity is : " + str(humid)
         print(currentHumidityString)
 
-        if humid<90:
+        if humid<HUMIDITY_THRESHOLD:
             GPIO.output(HUMIDIFIER_GPIO, GPIO.HIGH)
             PWMFan.start(FAN_PWM_ON_PERCENTAGE)
             print("Humidifer On")
 
-        if humid>90:
+        if humid>HUMIDITY_THRESHOLD:
             GPIO.output(HUMIDIFIER_GPIO, GPIO.LOW)
             PWMFan.stop()
             print("Humidifer Off")
