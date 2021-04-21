@@ -1,6 +1,6 @@
-***************************************************************
-		Aquarium Lid Installation
-**************************************************************
+
+Aquarium Lid Installation
+-------------------------
 
 1. Take a micro SD card
 
@@ -13,23 +13,24 @@ This will enable SSH from first boot. The Pi will delete the file once it has ch
 
 5. Open wpa_supplicant.conf in an editor, add the following lines, and enter your WiFi information
 
+```
 network={
 ssid="WIFI_SSID"
 psk="WIFI_PASSWORD"
 }
+```
 
 The RasPi should now join your WiFi network on boot
 
 6. Copy the file Aquarium_Lid_Installer.sh to the /home/pi directory
 
-**************************************************************
 7. Put the SD card in the RasPi, turn it on, log in over SSH.
 
 It will give you a warning about the remote host identification changing
 
 8. Change the password on the Pi
 
-9. Run sudo bash Aquarium_Lid_Installer.sh
+9. Run `sudo bash Aquarium_Lid_Installer.sh` in the `/home/pi` directory
 
 It will update and upgrade so it will take quite some time
 
