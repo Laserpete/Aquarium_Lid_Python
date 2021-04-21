@@ -26,7 +26,7 @@ HUMIDIFIER_GPIO = 21    # 40
 
 FAN_MINUTES_MODULO = 5 # run fan for one minute every five minutes, feel free to change this
 FAN_PWM_ON_PERCENTAGE = 25
-FAN_SECONDS_ON 60
+FAN_SECONDS_ON = 60
 
 HUMIDITY_THRESHOLD = 85
 
