@@ -20,11 +20,11 @@ psk="WIFI_PASSWORD"
 }
 ```
 
-The RasPi should now join your WiFi network on boot
+	The RasPi should now join your WiFi network on boot
 
 7. Put the SD card in the RasPi, turn it on, log in over SSH.
 
-It will give you a warning about the remote host identification changing
+	It will give you a warning about the remote host identification changing
 
 8. Change the password on the Pi
 
