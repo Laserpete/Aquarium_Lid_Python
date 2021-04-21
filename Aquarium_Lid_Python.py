@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 htu21d = HTU21D(1, 0x40)
 
-#GPIO pins. These are the broadcom pin numbers, rather than the board physical pin numbers, which are given in the comments comments here;
+#GPIO pins. These are the broadcom pin numbers, rather than the board physical pin numbers, which are given in the comments here;
 FAN_GPIO = 16           # 36
 LIGHT_SWITCH_GPIO = 20  # 38
 HUMIDIFIER_GPIO = 21    # 40
