@@ -21,21 +21,34 @@ psk="WIFI_PASSWORD"
 ```
 
 The RasPi should now join your WiFi network on boot
-
-6. Copy the file Aquarium_Lid_Installer.sh to the /home/pi directory
-
 7. Put the SD card in the RasPi, turn it on, log in over SSH.
 
 It will give you a warning about the remote host identification changing
 
 8. Change the password on the Pi
 
-9. Run `sudo bash Aquarium_Lid_Installer.sh` in the `/home/pi` directory
+9. Update, Upgrade, install relevant packages;
+	```
+	sudo apt-get update -y
+ 	sudo apt-get upgrade -y 
 
-It will update and upgrade so it will take quite some time
+	sudo apt-get install python3 python3-pip python3-pil python3-numpy git -y
 
-10. When prompted, enter your GitHub credentials
+	pip3 install RPi.GPIO spidev sensor smbus
+	```  
 
-11. Wait for ages
+10. Clone the git repository
+	```
+	git clone https://github.com/LaserPete/Aquarium_Lid_Python.git /home/pi/Aquarium_Lid_Python
+	```
+11. Modify Crontab in order to get the script to run on boot using 
+	```
+	sudo touch /etc/crontab
+    sudo echo "@reboot pi bash /home/pi/Aquarium_Lid_Python/Aquarium_Lid.sh" >> /etc/crontab
+	```
+
+12. Enable the i2c and SPI buses on the Raspberry Pi.
+	```
+	
 
 12. When it is all done, sudo reboot, hope for the best
