@@ -122,7 +122,7 @@ try:
             print("Humidifer Off")
 
  #Fan control
-         if minutes % FAN_MINUTES_MODULO == 0:
+        if minutes % FAN_MINUTES_MODULO == 0:
             print("Minutes = ", minutes, "fan PWM = ", FAN_PWM_ON_PERCENTAGE)
             PWMFan.start(FAN_PWM_ON_PERCENTAGE)
             sleep(FAN_SECONDS_ON)
