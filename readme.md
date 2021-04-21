@@ -48,7 +48,8 @@ It will give you a warning about the remote host identification changing
 	```
 
 12. Enable the i2c and SPI buses on the Raspberry Pi.
+	```    
+	sudo raspi-config nonint do_i2c 0
+    sudo raspi-config nonint do_spi 0
 	```
-	
-
 12. When it is all done, sudo reboot, hope for the best
