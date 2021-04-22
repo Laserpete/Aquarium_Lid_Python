@@ -30,7 +30,7 @@ FAN_SECONDS_ON = 60
 
 HUMIDITY_THRESHOLD = 85
 
-runtTime = 0
+fanOnTimeSoFar = 0
 
 # Setup GPIO pins
 GPIO.setwarnings(False)
@@ -128,7 +128,7 @@ try:
             print("Minutes = ", minutes, "fan PWM = ", FAN_PWM_ON_PERCENTAGE)
             PWMFan.start(FAN_PWM_ON_PERCENTAGE)
             fanOnTimeSoFar = minutes
-            
+
         elif minutes > fanOnTimeSoFar and humid > HUMIDITY_THRESHOLD:
             PWMFan.stop()
             #GPIO.output(FAN_GPIO, GPIO.HIGH)
