@@ -30,6 +30,8 @@ FAN_SECONDS_ON = 60
 
 HUMIDITY_THRESHOLD = 85
 
+runtTime = 0
+
 # Setup GPIO pins
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
