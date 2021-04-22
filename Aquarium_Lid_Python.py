@@ -127,8 +127,9 @@ try:
         if minutes % FAN_MINUTES_MODULO == 0:
             print("Minutes = ", minutes, "fan PWM = ", FAN_PWM_ON_PERCENTAGE)
             PWMFan.start(FAN_PWM_ON_PERCENTAGE)
-            runTime = minutes
-        elif minutes > runTime:
+            fanOnTimeSoFar = minutes
+            
+        elif minutes > fanOnTimeSoFar and humid > HUMIDITY_THRESHOLD:
             PWMFan.stop()
             #GPIO.output(FAN_GPIO, GPIO.HIGH)
         # if minutes % FAN_MINUTES_MODULO != 0 or humid > 90:
